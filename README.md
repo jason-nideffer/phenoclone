@@ -2,7 +2,7 @@
 
 ## Overview
 
-Phenoclone is an R-based package for analyzing and visualizing the relationship bewteen phenotype and clonality in scRNAseq data.
+Phenoclone is an R-based package for analyzing and visualizing the relationship bewteen phenotype and clonotype in scRNAseq data.
 
 See vignettes for a guided tutorial!
 
