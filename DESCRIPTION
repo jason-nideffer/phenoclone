@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Jason", "Nideffer", , "jasonnideffer@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4421-8656"))
-Description: Phenoclone is an R-based package for analyzing the relationship between phenotype and clonality in scRNAseq data. 
+Description: Phenoclone is an R-based package for analyzing and visualizing the relationship between phenotype and clonotype in scRNAseq data. 
 Imports: dplyr, ggplot2, Seurat, tidyr, ggalluvial 
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
