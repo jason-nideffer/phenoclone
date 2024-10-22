@@ -1,8 +1,7 @@
 
 #' Cluster Clonotypes By Distribution
 #'
-#' This function plots a UMAP where cells can be colored according to a variable.
-#' Multiple clonotypes will also be highlighted.
+#' This function clusters clonotypes (rank-based) into families based on their preference for adopting different subset identities. 
 #'
 #' @param seurat_object Seurat object to operate on
 #' @param minimum_count Integer specifying minimum number fo clones for a clonotype to be included in analysis
