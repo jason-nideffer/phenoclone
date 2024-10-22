@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 Install phenoclone from GitHub.
 ```{r echo = T, results = 'hide'}
 library(devtools)
-install_github("jason-nideffer/phenoclone")
+#install_github("jason-nideffer/phenoclone")
 library(phenoclone)
 library(ggplot2)
 ```
@@ -27,7 +27,7 @@ Loading in example seurat object `rna_tcr`. This seurat object has already been 
 
 ```{r}
 # Load Data
-rna_tcr <- readRDS('../../Data/rna_tcr_annotated.rds')
+rna_tcr <- readRDS('../Data/example_annotated_seurat.rds')
 ```
 
 The first function that you should perform is called `calculate_freq`, which will calculate the frequency of each clonotype on a per-sample basis. It is recommended that you also provide `cell_type` and `subject` column names so that the algorithm can calculate the frequencies of different clonotype-cell_type combinations and characterize clonotypes by their most frequent (mode) cellular identity.
@@ -56,7 +56,7 @@ After running `calculate_freq`, you will notice that new columns have been added
 
 
 ```{r}
-rna_tcr@meta.data[c(1:10), c(26:30)]
+rna_tcr@meta.data[c(1:10), c(6:10)]
 ```
 
 You can use the `expanded_clones` function to return a dataframe of clonotypes that are sorted by how expanded they are within a given sample. 
