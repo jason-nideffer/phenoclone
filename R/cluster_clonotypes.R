@@ -231,17 +231,18 @@ cluster_clonotypes <- function(seurat_object,
       
       color_order <- match(max_cell_types, seurat_object@misc$cell_type_order)
       
-      colColors <<- seurat_object@misc$colors[color_order]
+      color_dict <- seurat_object@misc$colors[color_order]
+      names(color_dict) <- 1:n_families
       
     # User provided colors
     } else {
       color_dict <- family_colors
       names(color_dict) <- 1:n_families
-      
-      color_keys <- clone_families[row.names(pheno_clone_count)]
     
-      colColors <- color_dict[color_keys]
     }
+
+    color_keys <- clone_families[row.names(pheno_clone_count)]
+    colColors <- color_dict[color_keys]
     
     # Heatmap
     heatmap(t(as.matrix(pheno_clone_count)), scale='none', Rowv=NA, 
