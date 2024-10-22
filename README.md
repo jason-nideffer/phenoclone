@@ -18,6 +18,6 @@ devtools::install_github("jason-nideffer/phenoclone")
 
 ## Getting help
 
-If you encounter any issues with phenoclone, please open an
+If you encounter any problems with phenoclone or if you have any questions, please open an
 [issue](https://github.com/jason-nideffer/phenoclone/issues).
 
