@@ -12,7 +12,7 @@
 #' @param n_families number of clone families to define via hierarchical clustering
 #' @param family_colors colors to label clone families. By default ("NULL"), colors provided to the 'plotting_aesthetics' function will be used
 #' @param plot Boolean specifying whether or not to plot a clustered heatmap
-#' @return a dataframe with clonotypes as rows and their propotional distribution across cell_types (or the variables contained within 'cell_type_column') as columns
+#' @return an object with two attributes: 'clone_families' (assignment of each clone to a numerical family/cluster) and 'matrix' (dataframe with clonotypes as rows and their propotional distribution across cell_types as columns)
 #' @export
 cluster_clonotypes <- function(seurat_object,
                                minimum_count=5,
@@ -181,7 +181,7 @@ cluster_clonotypes <- function(seurat_object,
   clone_families <- cutree(hc, k = n_families)
   
   # Get cell_type order
-  ordered_clones <<- row.names(pheno_clone_count[hc$order,])
+  ordered_clones <- row.names(pheno_clone_count[hc$order,])
   ordered_fams <- unique(clone_families[ordered_clones])
   
   # Renumber clone_families
@@ -196,8 +196,6 @@ cluster_clonotypes <- function(seurat_object,
   
   clone_families <- clone_families_renumbered
   
-  clone_families <- clone_families
-  
   cell_type_order <- c()
   for (fam in 1:n_families) {
     clones <- names(clone_families[clone_families==fam])
@@ -206,8 +204,6 @@ cluster_clonotypes <- function(seurat_object,
     
     cell_type_order <- c(cell_type_order, fam_pheno)
   }
-
-  ordered_fams <- ordered_fams
   
   # need to add back cell types that dont have their own fam
   add_back <- setdiff(colnames(pheno_clone_count), cell_type_order)
@@ -220,11 +216,22 @@ cluster_clonotypes <- function(seurat_object,
     
     # Colors for plotting aesthetic
     if (is.null(family_colors)) {
-      cell_type_colors <- seurat_object@misc$colors
-      names(cell_type_colors) <- seurat_object@misc$cell_type_order
+
+      mean_df <- merge(pheno_clone_count, data.frame(clone_families), by.x = 0, by.y = 0)
+      mean_df$Row.names <- NULL
       
-      colColors <- unname(cell_type_colors[cell_type_order[1:n_families]])
-      colColors <- colColors[clone_families]
+      mean_df <<- mean_df %>%
+        group_by(clone_families) %>%
+        summarise(across(everything(), mean))
+
+      color_keys <<- mean_df$clone_families
+      mean_df$clone_families <- NULL
+      
+      max_cell_types <<- colnames(mean_df)[apply(mean_df,1,which.max)]
+      
+      color_order <<- match(max_cell_types, seurat_object@misc$cell_type_order)
+      
+      colColors <<- seurat_object@misc$colors[color_order]
       
     # User provided colors
     } else {
