@@ -231,7 +231,7 @@ cluster_clonotypes <- function(seurat_object,
       
       color_order <- match(max_cell_types, seurat_object@misc$cell_type_order)
       
-      colColors <- seurat_object@misc$colors[color_order]
+      colColors <<- seurat_object@misc$colors[color_order]
       
     # User provided colors
     } else {
