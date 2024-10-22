@@ -187,5 +187,5 @@ p
 With the `clonotype_identity_matrix` function, you can perform hierarchical clustering on clonotypes based on their phenotypic composition. This can be used to identify clones with a preference for a given cell subset and determine the clonal relationship between different cell subsets.
 
 ```{r, fig.height=6, fig.width=6}
-clonotype_identity_matrix <- cluster_clonotypes(rna_tcr, minimum_count = 10)
+clonotype_identity_matrix <- cluster_clonotypes(rna_tcr, minimum_count = 10, n_families = 6)
 ```
