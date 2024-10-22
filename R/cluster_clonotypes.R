@@ -220,18 +220,18 @@ cluster_clonotypes <- function(seurat_object,
       mean_df <- merge(pheno_clone_count, data.frame(clone_families), by.x = 0, by.y = 0)
       mean_df$Row.names <- NULL
       
-      mean_df <<- mean_df %>%
+      mean_df <- mean_df %>%
         group_by(clone_families) %>%
         summarise(across(everything(), mean))
 
-      color_keys <<- mean_df$clone_families
+      color_keys <- mean_df$clone_families
       mean_df$clone_families <- NULL
       
-      max_cell_types <<- colnames(mean_df)[apply(mean_df,1,which.max)]
+      max_cell_types <- colnames(mean_df)[apply(mean_df,1,which.max)]
       
-      color_order <<- match(max_cell_types, seurat_object@misc$cell_type_order)
+      color_order <- match(max_cell_types, seurat_object@misc$cell_type_order)
       
-      colColors <<- seurat_object@misc$colors[color_order]
+      colColors <- seurat_object@misc$colors[color_order]
       
     # User provided colors
     } else {
