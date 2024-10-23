@@ -1,4 +1,4 @@
-# phenoclone <img align="right" src="man/figures/logo.png" style="height:100px;" />
+# phenoclone <img align="right" src="man/Figures/logo.png" style="height:100px;" />
 
 ## Overview
 
